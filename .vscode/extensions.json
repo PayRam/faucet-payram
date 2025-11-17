@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "nextjs",
+    "typescript",
+    "tailwindcss",
+    "prisma.prisma",
+    "dbaeumer.vscode-eslint"
+  ]
+}

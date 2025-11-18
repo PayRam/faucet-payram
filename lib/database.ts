@@ -4,12 +4,15 @@ import { FaucetClaim } from "./entities/FaucetClaim";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
-  host: process.env.DB_HOST || "localhost",
+  host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT || "5432"),
-  username: process.env.DB_USERNAME || "postgres",
-  password: process.env.DB_PASSWORD || "",
-  database: process.env.DB_DATABASE || "faucet_db",
-  synchronize: true, // Set to false in production
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  synchronize: true,
+  ssl: {
+    rejectUnauthorized: false, // Neon requires SSL
+  },
   logging: false,
   entities: [FaucetClaim],
   migrations: [],

@@ -85,12 +85,12 @@ export function validateEnvironmentConfig(): ConfigValidationResult {
   }
 
   // Check Twitter Configuration
-  if (!process.env.TWITTER_BEARER_TOKEN) {
+  if (!process.env.TWITTER_API_KEY) {
     warnings.push(
-      "TWITTER_BEARER_TOKEN is not set. Tweet verification will use fallback mode."
+      "TWITTER_API_KEY is not set. Tweet verification will use fallback mode."
     );
-  } else if (process.env.TWITTER_BEARER_TOKEN === "your_twitter_bearer_token") {
-    warnings.push("TWITTER_BEARER_TOKEN appears to be a placeholder value");
+  } else if (process.env.TWITTER_API_KEY === "your_TWITTER_API_KEY") {
+    warnings.push("TWITTER_API_KEY appears to be a placeholder value");
   }
 
   // Validate Faucet Configuration

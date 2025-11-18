@@ -3,6 +3,7 @@ import { initializeDatabase, AppDataSource } from "@/lib/database";
 import { FaucetClaim } from "@/lib/entities/FaucetClaim";
 import { ethers } from "ethers";
 import { LessThan, MoreThanOrEqual } from "typeorm";
+import axios from "axios";
 
 const MIN_MAINNET_BALANCE = parseFloat(
   process.env.MIN_MAINNET_BALANCE || "0.0025"
@@ -27,48 +28,74 @@ async function verifyTweet(tweetUrl: string): Promise<{
     const tweetId = tweetIdMatch[1];
 
     // Extract username from URL
-    const usernameMatch = tweetUrl.match(/twitter\.com\/([^\/]+)\//);
-    const tweetAccount = usernameMatch ? usernameMatch[1] : "unknown";
+    // const usernameMatch = tweetUrl.match(/twitter\.com\/([^\/]+)\//);
+    // const tweetAccount = usernameMatch ? usernameMatch[1] : "unknown";
 
     // Here you would implement actual Twitter API verification
-    // For now, we'll do a basic validation
-    const bearerToken = process.env.TWITTER_BEARER_TOKEN;
+    const apiKey = process.env.TWITTER_API_KEY;
 
-    if (bearerToken && bearerToken !== "your_twitter_bearer_token") {
-      // Make actual Twitter API call
-      const response = await fetch(
-        `https://api.twitter.com/2/tweets/${tweetId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${bearerToken}`,
-          },
+    console.log("=== Tweet Verification Debug ===");
+    console.log("Tweet ID:", tweetId);
+    console.log("API Key exists:", !!apiKey);
+    console.log(
+      "API Key value:",
+      apiKey ? `${apiKey.substring(0, 10)}...` : "not set"
+    );
+    console.log(
+      "API Key is valid:",
+      apiKey && apiKey !== "your_TWITTER_API_KEY"
+    );
+
+    if (apiKey && apiKey !== "your_TWITTER_API_KEY") {
+      console.log("Making Twitter API request...");
+
+      try {
+        // Make actual Twitter API call
+        const apiUrl = `https://api.twitterapi.io/twitter/tweets?tweet_ids=${tweetId}`;
+        console.log("API URL:", apiUrl);
+
+        const response = await axios.get(apiUrl, {
+          headers: { "X-API-Key": apiKey },
+        });
+
+        console.log("Twitter API response status:", response.status);
+
+        const data = response.data;
+        const tweetText = data.tweets[0]?.text || "";
+        console.log("Tweet text:", tweetText);
+
+        // Verify tweet contains required keywords
+        const hasRequiredContent = tweetText.includes(
+          "I'm claiming free Sepolia ETH from @PayRamApp Faucet! 🚀\n\nGet yours at"
+        );
+
+        console.log("Has required content:", hasRequiredContent);
+
+        const tweetAccount = data.tweets[0]?.author.userName || "unknown";
+
+        return {
+          tweetId,
+          tweetAccount,
+          isValid: hasRequiredContent,
+        };
+      } catch (apiError: any) {
+        console.error("Twitter API request failed:", apiError.message);
+        if (apiError.response) {
+          console.error(
+            "API Error Response:",
+            apiError.response.status,
+            apiError.response.data
+          );
         }
-      );
-
-      if (!response.ok) {
-        throw new Error("Tweet not found or API error");
+        throw new Error(`Twitter API error: ${apiError.message}`);
       }
-
-      const data = await response.json();
-      const tweetText = data.data?.text || "";
-
-      // Verify tweet contains required keywords
-      const hasRequiredContent =
-        tweetText.includes("Sepolia") || tweetText.includes("Payram");
-
-      return {
-        tweetId,
-        tweetAccount,
-        isValid: hasRequiredContent,
-      };
     }
 
-    // Fallback: Basic validation without API
-    return {
-      tweetId,
-      tweetAccount,
-      isValid: true, // Accept all tweets if API not configured
-    };
+    // No fallback - require proper API configuration
+    console.log("Twitter API key not configured properly");
+    throw new Error(
+      "Twitter API key is not configured. Please contact the administrator."
+    );
   } catch (error) {
     console.error("Tweet verification error:", error);
     throw new Error("Failed to verify tweet");

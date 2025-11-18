@@ -10,10 +10,6 @@ import Image from "next/image";
 export default function Home() {
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
-  const { data: mainnetBalance } = useBalance({
-    address: address,
-    chainId: mainnet.id,
-  });
 
   const [tweetUrl, setTweetUrl] = useState("");
   const [manualAddress, setManualAddress] = useState("");
@@ -22,6 +18,7 @@ export default function Home() {
   const [checkingBalance, setCheckingBalance] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [mainnetBalance, setMainnetBalance] = useState<any>(null);
   const [messageType, setMessageType] = useState<"success" | "error" | "">("");
 
   const handleContinue = async () => {
@@ -48,6 +45,7 @@ export default function Home() {
         setBalanceChecked(true);
         setMessage("Balance verified successfully!");
         setMessageType("success");
+        setMainnetBalance(response.data.balance);
       } else {
         setMessage(
           `Insufficient balance. Minimum 0.0025 ETH required. Current: ${response.data.balance} ETH`
@@ -100,12 +98,13 @@ export default function Home() {
 
   const generateTweetText = () => {
     const text = encodeURIComponent(
-      "I'm claiming free Sepolia ETH from @Payram Faucet! 🚀\n\nGet yours at payram.io\n\n#Ethereum #Sepolia #TestnetFaucet"
+      "I'm claiming free Sepolia ETH from @PayRamApp Faucet! 🚀\n\nGet yours at http://faucet.payram.com\n\n#Ethereum #Sepolia #TestnetFaucet"
     );
     return `https://twitter.com/intent/tweet?text=${text}`;
   };
+  console.log("Mainnet Balance:", mainnetBalance);
 
-  const minBalance = parseFloat(mainnetBalance?.formatted || "0");
+  const minBalance = parseFloat(mainnetBalance || "0");
   const hasMinBalance = minBalance >= 0.0025;
 
   return (
@@ -258,7 +257,7 @@ export default function Home() {
                           hasMinBalance ? "text-green-400" : "text-red-400"
                         }`}
                       >
-                        {mainnetBalance?.formatted || "0"} ETH
+                        {mainnetBalance || "0"} ETH
                       </p>
                       {!hasMinBalance && (
                         <p className="text-red-400 text-xs mt-2">

@@ -469,7 +469,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="mt-16 py-8 border-t border-gray-800">
-        <div className="container mx-auto px-4 text-center">
+        <div className="container mx-auto px-4 text-center flex flex-col items-center">
           <Image
             src="/green-payram-badge-350x100.png"
             alt="Payram Logo"

@@ -122,9 +122,7 @@ export default function Home() {
                   <span className="text-payram-green font-semibold">
                     0.001 ETH on Ethereum Mainnet
                   </span>{" "}
-                  to use the EVM faucets, 0.05 SOL on Solana Mainnet to use the
-                  Solana faucets, 0.05 HYPE on Hyperliquid Mainnet to use the
-                  Hyperliquid faucets.
+                  to use the EVM faucets.
                 </p>
 
                 {isConnected && address && (
@@ -313,7 +311,7 @@ export default function Home() {
               </button>
             </div>
 
-            <div className="bg-gradient-to-br from-payram-dark to-payram-purple rounded-2xl p-8 shadow-2xl border border-payram-green/20">
+            {/* <div className="bg-gradient-to-br from-payram-dark to-payram-purple rounded-2xl p-8 shadow-2xl border border-payram-green/20">
               <h2 className="text-2xl font-bold text-white mb-4">
                 How to Make a Flash Loan using Aave (DeFi)
               </h2>
@@ -337,7 +335,7 @@ export default function Home() {
                   />
                 </svg>
               </button>
-            </div>
+            </div> */}
 
             {/* Faucet Information */}
             <div className="bg-gray-900 rounded-2xl p-8 shadow-2xl border border-payram-green/20">

@@ -114,10 +114,10 @@ export default function Home() {
       <header className="p-6 flex justify-between items-center">
         <div className="flex items-center gap-3">
           <Image
-            src="/payram_logoIconVividGreen.svg"
+            src="/payram_horizontalVividGreen.svg"
             alt="Payram Logo"
-            width={90}
-            height={25}
+            width={244}
+            height={53}
             priority
           />
         </div>
@@ -470,10 +470,13 @@ export default function Home() {
       {/* Footer */}
       <footer className="mt-16 py-8 border-t border-gray-800">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-gray-400">
-            Built with ❤️ by{" "}
-            <span className="text-payram-green font-semibold">PAYRAM</span>
-          </p>
+          <Image
+            src="/green-payram-badge-350x100.png"
+            alt="Payram Logo"
+            width={244}
+            height={53}
+            priority
+          />
           <p className="text-gray-500 text-sm mt-2">
             Permissionless commerce starts here
           </p>

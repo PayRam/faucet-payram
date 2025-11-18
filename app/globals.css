@@ -9,3 +9,31 @@
 body {
   font-family: var(--font-poppins);
 }
+
+/* Custom RainbowKit Connect Button Styles */
+.payram-connect-button button[data-testid="rk-connect-button"],
+.payram-connect-button button {
+  background-color: #01e46f !important;
+  color: #003401 !important;
+  font-weight: 600 !important;
+  transition: background-color 0.2s ease !important;
+}
+
+.payram-connect-button button[data-testid="rk-connect-button"]:hover,
+.payram-connect-button button:hover {
+  background-color: #caff54 !important;
+}
+
+/* Custom RainbowKit Connect Button Styles */
+.payram-connect-button button[data-testid="rk-connect-button"],
+.payram-connect-button button {
+  background-color: #01e46f !important;
+  color: #003401 !important;
+  font-weight: 600 !important;
+  transition: background-color 0.2s ease !important;
+}
+
+.payram-connect-button button[data-testid="rk-connect-button"]:hover,
+.payram-connect-button button:hover {
+  background-color: #caff54 !important;
+}

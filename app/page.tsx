@@ -16,13 +16,57 @@ export default function Home() {
   });
 
   const [tweetUrl, setTweetUrl] = useState("");
+  const [manualAddress, setManualAddress] = useState("");
+  const [verifiedAddress, setVerifiedAddress] = useState("");
+  const [balanceChecked, setBalanceChecked] = useState(false);
+  const [checkingBalance, setCheckingBalance] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState<"success" | "error" | "">("");
 
+  const handleContinue = async () => {
+    const walletAddress = isConnected ? address : manualAddress;
+
+    if (!walletAddress) {
+      setMessage("Please connect your wallet or enter a wallet address");
+      setMessageType("error");
+      return;
+    }
+
+    setCheckingBalance(true);
+    setMessage("");
+    setMessageType("");
+
+    try {
+      // Check balance using the API or ethers
+      const response = await axios.get(
+        `/api/check-balance?address=${walletAddress}`
+      );
+
+      if (response.data.hasMinBalance) {
+        setVerifiedAddress(walletAddress);
+        setBalanceChecked(true);
+        setMessage("Balance verified successfully!");
+        setMessageType("success");
+      } else {
+        setMessage(
+          `Insufficient balance. Minimum 0.0025 ETH required. Current: ${response.data.balance} ETH`
+        );
+        setMessageType("error");
+        setBalanceChecked(false);
+      }
+    } catch (error: any) {
+      setMessage(error.response?.data?.error || "Failed to verify balance");
+      setMessageType("error");
+      setBalanceChecked(false);
+    } finally {
+      setCheckingBalance(false);
+    }
+  };
+
   const handleClaim = async () => {
-    if (!address || !isConnected) {
-      setMessage("Please connect your wallet first");
+    if (!balanceChecked || !verifiedAddress) {
+      setMessage("Please verify your balance first by clicking Continue");
       setMessageType("error");
       return;
     }
@@ -39,7 +83,7 @@ export default function Home() {
 
     try {
       const response = await axios.post("/api/claim", {
-        walletAddress: address,
+        walletAddress: verifiedAddress,
         tweetUrl: tweetUrl,
       });
 
@@ -115,7 +159,8 @@ export default function Home() {
               <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
                 <p className="text-gray-400 text-sm mb-4">
                   Connect your wallet! We support Coinbase Wallet, MetaMask,
-                  Uniswap Wallet, and Phantom wallet.
+                  Uniswap Wallet, and Phantom wallet. Or enter your wallet
+                  address manually below.
                 </p>
                 <p className="text-gray-400 text-sm mb-4">
                   A user's wallet must hold at least{" "}
@@ -125,7 +170,62 @@ export default function Home() {
                   to use the EVM faucets.
                 </p>
 
-                {isConnected && address && (
+                {/* Manual Address Input */}
+                <div className="mb-4">
+                  <label className="block text-sm text-gray-400 mb-2">
+                    Wallet Address{" "}
+                    {!isConnected && <span className="text-red-400">*</span>}
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="0x..."
+                    value={isConnected ? address || "" : manualAddress}
+                    onChange={(e) => {
+                      if (!isConnected) {
+                        setManualAddress(e.target.value);
+                        setBalanceChecked(false);
+                        setVerifiedAddress("");
+                      }
+                    }}
+                    disabled={isConnected}
+                    className="w-full bg-gray-900 text-white px-4 py-3 rounded-lg border border-gray-700 focus:border-payram-green focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-mono text-sm"
+                  />
+                  {!isConnected && (
+                    <p className="text-xs text-gray-500 mt-1">
+                      Enter your wallet address manually or connect your wallet
+                      above
+                    </p>
+                  )}
+                </div>
+
+                {/* Divider */}
+                <div className="flex items-center my-4">
+                  <div className="flex-1 border-t border-gray-600"></div>
+                  <span className="px-3 text-gray-500 text-sm">OR</span>
+                  <div className="flex-1 border-t border-gray-600"></div>
+                </div>
+
+                {/* Connect Wallet Button */}
+                <div className="mb-4">
+                  <div className="payram-connect-button">
+                    <ConnectButton />
+                  </div>
+                </div>
+
+                {/* Continue Button */}
+                {(isConnected || manualAddress) && !balanceChecked && (
+                  <button
+                    onClick={handleContinue}
+                    disabled={
+                      checkingBalance || (!isConnected && !manualAddress)
+                    }
+                    className="w-full bg-payram-green hover:bg-payram-lime text-payram-dark font-semibold py-3 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {checkingBalance ? "Checking Balance..." : "Continue →"}
+                  </button>
+                )}
+
+                {balanceChecked && verifiedAddress && (
                   <div className="mt-4 space-y-3">
                     <div className="flex items-center justify-between p-3 bg-gray-900 rounded-lg">
                       <span className="text-sm text-gray-400">
@@ -167,12 +267,6 @@ export default function Home() {
                         </p>
                       )}
                     </div>
-                  </div>
-                )}
-
-                {!isConnected && (
-                  <div className="mt-4">
-                    <ConnectButton />
                   </div>
                 )}
               </div>
@@ -237,7 +331,11 @@ export default function Home() {
             {/* Claim Button */}
             <button
               onClick={handleClaim}
-              disabled={loading || !isConnected || !hasMinBalance}
+              disabled={
+                loading ||
+                (!isConnected && !manualAddress) ||
+                (isConnected && !hasMinBalance)
+              }
               className="w-full bg-gradient-to-r from-payram-green to-payram-lime text-payram-dark font-bold text-lg py-4 rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg"
             >
               {loading ? "Processing..." : "Continue →"}

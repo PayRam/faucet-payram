@@ -6,6 +6,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { mainnet } from "wagmi/chains";
 import axios from "axios";
 import Image from "next/image";
+import { Linkedin, Twitter, Mail, ArrowUp, ChevronRight } from "lucide-react";
 
 export default function Home() {
   const { address, isConnected } = useAccount();
@@ -110,44 +111,46 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-black">
       {/* Header */}
-      <header className="p-6 flex justify-between items-center">
+      <header className="p-4 md:p-6 flex justify-between items-center">
         <div className="flex items-center gap-3">
           <Image
             src="/payram_horizontalVividGreen.svg"
             alt="Payram Logo"
-            width={244}
-            height={53}
+            width={180}
+            height={39}
             priority
+            className="w-32 md:w-[180px] h-auto"
           />
         </div>
         <ConnectButton />
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-12 max-w-6xl">
-        <div className="grid lg:grid-cols-2 gap-8 items-start">
+      <main className="container mx-auto px-4 py-6 md:py-12 max-w-6xl">
+        <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start">
           {/* Left Side - Faucet Form */}
           <div
-            className="bg-gray-900 rounded-2xl p-8 shadow-2xl border border-payram-green/20"
+            className="bg-gray-900 rounded-2xl p-4 md:p-8 shadow-2xl border border-payram-green/20"
             style={{
               boxShadow:
                 "0 0 40px rgba(202, 255, 84, 0.16), 0 0 80px rgba(202, 255, 84, 0.08)",
             }}
           >
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-6">
               <Image
                 src="/payram_logoIconVividGreen.svg"
                 alt="Payram Logo"
-                width={90}
-                height={25}
+                width={60}
+                height={17}
                 priority
+                className="w-12 md:w-[90px] h-auto"
               />
-              <h1 className="text-4xl font-bold text-white">
+              <h1 className="text-2xl md:text-4xl font-bold text-white">
                 Ethereum Sepolia Faucet
               </h1>
             </div>
 
-            <p className="text-gray-300 mb-8 leading-relaxed">
+            <p className="text-gray-300 mb-6 md:mb-8 leading-relaxed text-sm md:text-base">
               QuickNode got tired of having to scrounge for testnet tokens, so
               we created this Ethereum Faucet for Sepolia.
             </p>
@@ -372,19 +375,7 @@ export default function Home() {
               </p>
               <button className="text-payram-lime hover:text-payram-green font-semibold flex items-center gap-2 transition-colors">
                 Explore this guide
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
+                <ChevronRight className="w-4 h-4" />
               </button>
             </div>
 
@@ -398,19 +389,7 @@ export default function Home() {
               </p>
               <button className="text-payram-lime hover:text-payram-green font-semibold flex items-center gap-2 transition-colors text-base">
                 Explore this guide
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
+                <ChevronRight className="w-4 h-4" />
               </button>
             </div>
 
@@ -473,91 +452,77 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-16 py-8 bg-payram-lime">
+      <footer className="mt-8 md:mt-16 py-6 md:py-8 bg-payram-lime">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-0">
             {/* Left Side - Logo and Copyright */}
-            <div className="flex items-center gap-8">
+            <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8 w-full md:w-auto">
               <Image
                 src="https://cdn.prod.website-files.com/666d5edad629fd8ec028a7b3/678e3b42969db27e1e393876_logo%20(5).svg"
                 alt="Payram Logo"
-                width={180}
-                height={40}
+                width={140}
+                height={31}
                 priority
+                className="w-32 md:w-[180px] h-auto"
               />
-              <div className="flex items-center gap-4 text-sm text-gray-900">
-                <span>© 2025 — Copyright</span>
-                <span>|</span>
-                <a href="#" className="hover:text-black transition-colors">
+              <div className="flex flex-wrap items-center gap-2 md:gap-4 text-xs md:text-sm text-gray-900">
+                <span className="whitespace-nowrap">© 2025 — Copyright</span>
+                <span className="hidden md:inline">|</span>
+                <a
+                  href="#"
+                  className="hover:text-black transition-colors whitespace-nowrap"
+                >
                   Privacy Policy
                 </a>
-                <a href="#" className="hover:text-black transition-colors">
+                <a
+                  href="#"
+                  className="hover:text-black transition-colors whitespace-nowrap"
+                >
                   Terms & Conditions
                 </a>
-                <a href="#" className="hover:text-black transition-colors">
+                <a
+                  href="#"
+                  className="hover:text-black transition-colors whitespace-nowrap"
+                >
                   Cookie Policy
                 </a>
               </div>
             </div>
 
             {/* Right Side - Social Links and Back to Top */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 md:gap-4">
               <a
-                href="#"
-                className="flex items-center gap-2 text-gray-900 hover:text-black transition-colors"
+                href="https://www.linkedin.com/company/payram"
+                className="flex items-center gap-1.5 md:gap-2 text-gray-900 hover:text-black transition-colors text-sm md:text-base"
               >
                 <svg
-                  className="w-4 h-4"
+                  className="w-3.5 h-3.5 md:w-4 md:h-4"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                 </svg>
-                LinkedIn
+                <span className="hidden sm:inline">LinkedIn</span>
               </a>
               <a
-                href="#"
-                className="flex items-center gap-2 text-gray-900 hover:text-black transition-colors"
+                href="https://x.com/PayRamApp"
+                className="flex items-center gap-1.5 md:gap-2 text-gray-900 hover:text-black transition-colors text-sm md:text-base"
               >
-                <svg
-                  className="w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-                Twitter
+                <Twitter className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                <span className="hidden sm:inline">Twitter</span>
               </a>
               <a
-                href="#"
-                className="flex items-center gap-2 text-gray-900 hover:text-black transition-colors"
+                href="mailto:dev@payram.com"
+                className="flex items-center gap-1.5 md:gap-2 text-gray-900 hover:text-black transition-colors text-sm md:text-base"
               >
-                <svg
-                  className="w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                </svg>
-                Email
+                <Mail className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                <span className="hidden sm:inline">Email</span>
               </a>
               <button
                 onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                className="ml-4 w-10 h-10 rounded-full bg-black hover:bg-gray-900 transition-colors flex items-center justify-center text-payram-lime"
+                className="ml-2 md:ml-4 w-9 h-9 md:w-10 md:h-10 rounded-full bg-black hover:bg-gray-900 transition-colors flex items-center justify-center text-payram-lime"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 10l7-7m0 0l7 7m-7-7v18"
-                  />
-                </svg>
+                <ArrowUp className="w-5 h-5" />
               </button>
             </div>
           </div>

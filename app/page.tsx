@@ -6,7 +6,15 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { mainnet } from "wagmi/chains";
 import axios from "axios";
 import Image from "next/image";
-import { Linkedin, Twitter, Mail, ArrowUp, ChevronRight } from "lucide-react";
+import {
+  Linkedin,
+  Twitter,
+  Mail,
+  ArrowUp,
+  ChevronRight,
+  ChevronDown,
+} from "lucide-react";
+import faqData from "@/data/FAQ.json";
 
 export default function Home() {
   const { address, isConnected } = useAccount();
@@ -21,6 +29,7 @@ export default function Home() {
   const [message, setMessage] = useState("");
   const [mainnetBalance, setMainnetBalance] = useState<any>(null);
   const [messageType, setMessageType] = useState<"success" | "error" | "">("");
+  const [openFaqId, setOpenFaqId] = useState<number | null>(null);
 
   const handleContinue = async () => {
     const walletAddress = isConnected ? address : manualAddress;
@@ -449,6 +458,48 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        {/* FAQ Section */}
+        <div className="mt-12 md:mt-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#F9F5F0]/60 mb-6 md:mb-8 text-center">
+            Frequently Asked Questions
+          </h2>
+          <div className="space-y-4">
+            {faqData.map((faq) => (
+              <div
+                key={faq.id}
+                className="rounded-xl border border-[#F9F5F0]/30 overflow-hidden bg-transparent"
+              >
+                <button
+                  onClick={() =>
+                    setOpenFaqId(openFaqId === faq.id ? null : faq.id)
+                  }
+                  className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-[#F9F5F0]/5 transition-colors"
+                >
+                  <span className="text-[#F9F5F0]/60 font-semibold text-base md:text-lg pr-4">
+                    {faq.question}
+                  </span>
+                  <ChevronDown
+                    className={`w-5 h-5 text-payram-lime flex-shrink-0 transition-transform duration-300 ${
+                      openFaqId === faq.id ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    openFaqId === faq.id ? "max-h-96" : "max-h-0"
+                  }`}
+                >
+                  <div className="px-6 pb-4 pt-2">
+                    <p className="text-[#F9F5F0]/70 text-sm md:text-base leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </main>
 
       {/* Footer */}
@@ -458,7 +509,7 @@ export default function Home() {
             {/* Left Side - Logo and Copyright */}
             <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8 w-full md:w-auto">
               <Image
-                src="https://cdn.prod.website-files.com/666d5edad629fd8ec028a7b3/678e3b42969db27e1e393876_logo%20(5).svg"
+                src="/PayRam_longshadow_long_1.svg"
                 alt="Payram Logo"
                 width={140}
                 height={31}
@@ -469,19 +520,19 @@ export default function Home() {
                 <span className="whitespace-nowrap">© 2025 — Copyright</span>
                 <span className="hidden md:inline">|</span>
                 <a
-                  href="#"
+                  href="https://payram.com/privacy-policy"
                   className="hover:text-black transition-colors whitespace-nowrap"
                 >
                   Privacy Policy
                 </a>
                 <a
-                  href="#"
+                  href="https://payram.com/terms-and-conditions"
                   className="hover:text-black transition-colors whitespace-nowrap"
                 >
                   Terms & Conditions
                 </a>
                 <a
-                  href="#"
+                  href="https://payram.com/cookie-policy"
                   className="hover:text-black transition-colors whitespace-nowrap"
                 >
                   Cookie Policy

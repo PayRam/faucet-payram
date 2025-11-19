@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "question": "What is the Payram Sepolia Faucet?",
+    "answer": "The Payram Sepolia Faucet is a free service that distributes Sepolia testnet ETH to developers and users who need it for testing their Ethereum applications. Sepolia is a proof-of-stake testnet that closely mirrors the Ethereum mainnet environment."
+  },
+  {
+    "id": 2,
+    "question": "How much Sepolia ETH can I receive?",
+    "answer": "You can receive 0.05 Sepolia ETH per successful claim. You're allowed to claim up to 3 times per day per wallet address, with a 5-minute cooldown between each claim."
+  },
+  {
+    "id": 3,
+    "question": "What are the requirements to use the faucet?",
+    "answer": "To use the faucet, your wallet must hold at least 0.0025 ETH on Ethereum Mainnet. You also need to share a tweet about the faucet and submit the tweet URL. Each tweet can only be used once for claiming."
+  },
+  {
+    "id": 4,
+    "question": "Why do I need to have mainnet ETH to use the faucet?",
+    "answer": "This requirement helps prevent abuse and ensures that the faucet is used by genuine developers and users who are actively working with Ethereum. It's a minimal requirement that helps maintain the sustainability of the faucet service."
+  },
+  {
+    "id": 5,
+    "question": "How long do I have to wait between claims?",
+    "answer": "There is a 5-minute cooldown period between claims. After successfully claiming Sepolia ETH, you'll need to wait 5 minutes before you can make another claim with the same wallet address."
+  },
+  {
+    "id": 6,
+    "question": "What wallets are supported?",
+    "answer": "We support all major Ethereum wallets including MetaMask, Coinbase Wallet, WalletConnect-compatible wallets, and more. You can also manually enter your wallet address if you prefer not to connect your wallet directly."
+  },
+  {
+    "id": 7,
+    "question": "Can I use the same tweet for multiple claims?",
+    "answer": "No, each tweet can only be used once for claiming. You'll need to create a new tweet each time you want to claim Sepolia ETH. This helps promote the faucet and ensures fair distribution."
+  },
+  {
+    "id": 8,
+    "question": "What should I do if my claim fails?",
+    "answer": "If your claim fails, check that: 1) Your wallet has at least 0.0025 ETH on mainnet, 2) You've waited the full cooldown period, 3) You haven't exceeded the daily limit, 4) Your tweet URL is correct and hasn't been used before. If issues persist, contact our support team."
+  },
+  {
+    "id": 9,
+    "question": "Is there a daily limit on claims?",
+    "answer": "Yes, the faucet has two limits: 1) Each wallet can claim a maximum of 3 times per day, and 2) The faucet has a total daily budget of 5 ETH distributed across all users. Once the daily budget is reached, users will need to wait until the next day."
+  },
+  {
+    "id": 10,
+    "question": "How long does it take to receive the Sepolia ETH?",
+    "answer": "Once your claim is approved, the Sepolia ETH is sent immediately to your wallet. The transaction typically confirms within a few seconds to a minute, depending on network conditions. You can track your transaction using the transaction hash provided."
+  }
+]

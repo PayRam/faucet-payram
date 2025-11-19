@@ -5,11 +5,22 @@ import { ethers } from "ethers";
 import { LessThan, MoreThanOrEqual } from "typeorm";
 import axios from "axios";
 
-const MIN_MAINNET_BALANCE = parseFloat(
-  process.env.MIN_MAINNET_BALANCE || "0.0025"
-);
+// Configuration validation
+function getMinMainnetBalance(): number {
+  const minBalance = process.env.MIN_MAINNET_BALANCE;
+  if (!minBalance) {
+    throw new Error("MIN_MAINNET_BALANCE is not configured");
+  }
+  const parsed = parseFloat(minBalance);
+  if (isNaN(parsed)) {
+    throw new Error(`Invalid MIN_MAINNET_BALANCE value: ${minBalance}`);
+  }
+  return parsed;
+}
+
 const COOLDOWN_MINUTES = parseInt(process.env.COOLDOWN_MINUTES || "5");
 const DAILY_CLAIM_LIMIT = parseInt(process.env.DAILY_CLAIM_LIMIT || "3");
+const MAX_DAILY_CLAIMS = parseFloat(process.env.MAX_DAILY_CLAIMS || "100");
 const FAUCET_AMOUNT = process.env.FAUCET_AMOUNT || "0.05";
 
 // Helper function to verify tweet
@@ -107,10 +118,13 @@ async function checkMainnetBalance(address: string): Promise<boolean> {
   try {
     const rpcUrl = process.env.ETHEREUM_MAINNET_RPC;
     if (!rpcUrl || rpcUrl.includes("YOUR_API_KEY")) {
-      console.warn("Mainnet RPC not configured, skipping balance check");
-      return true; // Skip check if not configured
+      console.error("Ethereum Mainnet RPC is not configured properly");
+      throw new Error(
+        "Ethereum Mainnet RPC is not configured. Please contact the administrator."
+      );
     }
 
+    const MIN_MAINNET_BALANCE = getMinMainnetBalance();
     const provider = new ethers.JsonRpcProvider(rpcUrl);
     const balance = await provider.getBalance(address);
     const balanceInEth = parseFloat(ethers.formatEther(balance));
@@ -118,7 +132,7 @@ async function checkMainnetBalance(address: string): Promise<boolean> {
     return balanceInEth >= MIN_MAINNET_BALANCE;
   } catch (error) {
     console.error("Balance check error:", error);
-    return false;
+    throw error;
   }
 }
 
@@ -145,7 +159,7 @@ function getRandomTreasuryWallet(): ethers.Wallet {
 async function distributeETH(
   toAddress: string,
   amount: string
-): Promise<string> {
+): Promise<{ txHash: string; fromWallet: string }> {
   try {
     const wallet = getRandomTreasuryWallet();
     const tx = await wallet.sendTransaction({
@@ -154,7 +168,7 @@ async function distributeETH(
     });
 
     await tx.wait();
-    return tx.hash;
+    return { txHash: tx.hash, fromWallet: wallet.address };
   } catch (error) {
     console.error("Distribution error:", error);
     throw new Error("Failed to send ETH");
@@ -188,9 +202,10 @@ export async function POST(request: NextRequest) {
     // Check mainnet balance
     const hasMinBalance = await checkMainnetBalance(walletAddress);
     if (!hasMinBalance) {
+      const minBalance = getMinMainnetBalance();
       return NextResponse.json(
         {
-          error: `Insufficient mainnet balance. Minimum ${MIN_MAINNET_BALANCE} ETH required.`,
+          error: `Insufficient mainnet balance. Minimum ${minBalance} ETH required.`,
         },
         { status: 400 }
       );
@@ -262,15 +277,53 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Check max daily claims (total token amount distributed across all users)
+    const dailyClaimsData = await claimRepository.find({
+      where: {
+        time_stamp: MoreThanOrEqual(today),
+      },
+      select: ["amount"],
+    });
+
+    const totalDailyAmount = dailyClaimsData.reduce(
+      (sum, claim) => sum + parseFloat(claim.amount),
+      0
+    );
+
+    const remainingBudget = MAX_DAILY_CLAIMS - totalDailyAmount;
+    const claimAmount = parseFloat(FAUCET_AMOUNT);
+
+    if (remainingBudget < claimAmount) {
+      return NextResponse.json(
+        {
+          error: `Daily faucet budget exhausted. ${remainingBudget.toFixed(
+            4
+          )} ETH remaining (need ${claimAmount} ETH).`,
+        },
+        { status: 429 }
+      );
+    }
+
+    // Get client IP address
+    const ip =
+      request.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
+      request.headers.get("x-real-ip") ||
+      "unknown";
+
     // Distribute ETH
-    const txHash = await distributeETH(walletAddress, FAUCET_AMOUNT);
+    const { txHash, fromWallet } = await distributeETH(
+      walletAddress,
+      FAUCET_AMOUNT
+    );
 
     // Save claim to database
     const claim = new FaucetClaim();
     claim.to_wallet_address = walletAddress;
+    claim.from_wallet_address = fromWallet;
     claim.tweet_id = tweetId;
     claim.tweet_account = tweetAccount;
     claim.amount = FAUCET_AMOUNT;
+    claim.ip_address = ip;
     await claimRepository.save(claim);
 
     return NextResponse.json({

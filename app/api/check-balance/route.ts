@@ -10,6 +10,31 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const address = searchParams.get("address");
 
+    // Get MIN_MAINNET_BALANCE from env
+    const minBalance = process.env.MIN_MAINNET_BALANCE;
+    if (!minBalance) {
+      console.error("MIN_MAINNET_BALANCE is not configured");
+      return NextResponse.json(
+        {
+          error:
+            "Configuration error: MIN_MAINNET_BALANCE is not set. Please contact the administrator.",
+        },
+        { status: 500 }
+      );
+    }
+
+    const MIN_MAINNET_BALANCE = parseFloat(minBalance);
+    if (isNaN(MIN_MAINNET_BALANCE)) {
+      console.error("MIN_MAINNET_BALANCE is not a valid number:", minBalance);
+      return NextResponse.json(
+        {
+          error:
+            "Configuration error: Invalid MIN_MAINNET_BALANCE value. Please contact the administrator.",
+        },
+        { status: 500 }
+      );
+    }
+
     if (!address) {
       return NextResponse.json(
         { error: "Wallet address is required" },
@@ -29,13 +54,14 @@ export async function GET(request: NextRequest) {
     const rpcUrl = process.env.ETHEREUM_MAINNET_RPC;
 
     if (!rpcUrl || rpcUrl.includes("YOUR_API_KEY")) {
-      // If RPC not configured, return mock response for development
-      console.warn("Mainnet RPC not configured, skipping balance check");
-      return NextResponse.json({
-        hasMinBalance: true,
-        balance: "0.0025",
-        required: MIN_MAINNET_BALANCE.toString(),
-      });
+      console.error("Ethereum Mainnet RPC is not configured properly");
+      return NextResponse.json(
+        {
+          error:
+            "Configuration error: Ethereum Mainnet RPC is not configured. Please contact the administrator.",
+        },
+        { status: 500 }
+      );
     }
 
     try {

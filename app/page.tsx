@@ -108,7 +108,7 @@ export default function Home() {
   const hasMinBalance = minBalance >= 0.0025;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-payram-dark via-payram-purple to-payram-dark">
+    <div className="min-h-screen bg-black">
       {/* Header */}
       <header className="p-6 flex justify-between items-center">
         <div className="flex items-center gap-3">
@@ -127,7 +127,13 @@ export default function Home() {
       <main className="container mx-auto px-4 py-12 max-w-6xl">
         <div className="grid lg:grid-cols-2 gap-8 items-start">
           {/* Left Side - Faucet Form */}
-          <div className="bg-gray-900 rounded-2xl p-8 shadow-2xl border border-payram-green/20">
+          <div
+            className="bg-gray-900 rounded-2xl p-8 shadow-2xl border border-payram-green/20"
+            style={{
+              boxShadow:
+                "0 0 40px rgba(202, 255, 84, 0.16), 0 0 80px rgba(202, 255, 84, 0.08)",
+            }}
+          >
             <div className="flex items-center gap-3 mb-6">
               <Image
                 src="/payram_logoIconVividGreen.svg"
@@ -356,11 +362,11 @@ export default function Home() {
 
           {/* Right Side - Information */}
           <div className="space-y-6">
-            <div className="bg-gradient-to-br from-payram-magenta to-payram-purple rounded-2xl p-8 shadow-2xl">
+            <div className="rounded-2xl p-8 shadow-2xl border border-white/16">
               <h2 className="text-2xl font-bold text-white mb-4">
                 How to Create and Deploy an ERC20 Token (Smart Contract)
               </h2>
-              <p className="text-gray-200 mb-4">
+              <p className="text-gray-200 mb-4 text-base">
                 This guide will bring you up to speed with ERC-20 tokens and
                 show you how to create them.
               </p>
@@ -382,15 +388,15 @@ export default function Home() {
               </button>
             </div>
 
-            <div className="bg-gradient-to-br from-payram-purple to-payram-dark rounded-2xl p-8 shadow-2xl border border-payram-green/20">
+            <div className="rounded-2xl p-8 shadow-2xl border border-white/16">
               <h2 className="text-2xl font-bold text-white mb-4">
                 How to Create and Deploy an ERC-721 (NFT)
               </h2>
-              <p className="text-gray-200 mb-4">
+              <p className="text-gray-200 mb-4 text-base">
                 This guide will show you how to create and deploy an ERC-721
                 token.
               </p>
-              <button className="text-payram-lime hover:text-payram-green font-semibold flex items-center gap-2 transition-colors">
+              <button className="text-payram-lime hover:text-payram-green font-semibold flex items-center gap-2 transition-colors text-base">
                 Explore this guide
                 <svg
                   className="w-4 h-4"
@@ -408,7 +414,7 @@ export default function Home() {
               </button>
             </div>
 
-            {/* <div className="bg-gradient-to-br from-payram-dark to-payram-purple rounded-2xl p-8 shadow-2xl border border-payram-green/20">
+            {/* <div className="rounded-2xl p-8 shadow-2xl border border-white/16">
               <h2 className="text-2xl font-bold text-white mb-4">
                 How to Make a Flash Loan using Aave (DeFi)
               </h2>
@@ -435,7 +441,7 @@ export default function Home() {
             </div> */}
 
             {/* Faucet Information */}
-            <div className="bg-gray-900 rounded-2xl p-8 shadow-2xl border border-payram-green/20">
+            <div className="rounded-2xl p-8 shadow-2xl border border-white/16">
               <h3 className="text-xl font-bold text-white mb-4">
                 Faucet Information
               </h3>
@@ -467,18 +473,94 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-16 py-8 border-t border-gray-800">
-        <div className="container mx-auto px-4 text-center flex flex-col items-center">
-          <Image
-            src="/green-payram-badge-350x100.png"
-            alt="Payram Logo"
-            width={244}
-            height={53}
-            priority
-          />
-          <p className="text-gray-500 text-sm mt-2">
-            Permissionless commerce starts here
-          </p>
+      <footer className="mt-16 py-8 bg-payram-lime">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between">
+            {/* Left Side - Logo and Copyright */}
+            <div className="flex items-center gap-8">
+              <Image
+                src="https://cdn.prod.website-files.com/666d5edad629fd8ec028a7b3/678e3b42969db27e1e393876_logo%20(5).svg"
+                alt="Payram Logo"
+                width={180}
+                height={40}
+                priority
+              />
+              <div className="flex items-center gap-4 text-sm text-gray-900">
+                <span>© 2025 — Copyright</span>
+                <span>|</span>
+                <a href="#" className="hover:text-black transition-colors">
+                  Privacy Policy
+                </a>
+                <a href="#" className="hover:text-black transition-colors">
+                  Terms & Conditions
+                </a>
+                <a href="#" className="hover:text-black transition-colors">
+                  Cookie Policy
+                </a>
+              </div>
+            </div>
+
+            {/* Right Side - Social Links and Back to Top */}
+            <div className="flex items-center gap-4">
+              <a
+                href="#"
+                className="flex items-center gap-2 text-gray-900 hover:text-black transition-colors"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+                LinkedIn
+              </a>
+              <a
+                href="#"
+                className="flex items-center gap-2 text-gray-900 hover:text-black transition-colors"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+                Twitter
+              </a>
+              <a
+                href="#"
+                className="flex items-center gap-2 text-gray-900 hover:text-black transition-colors"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                </svg>
+                Email
+              </a>
+              <button
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                className="ml-4 w-10 h-10 rounded-full bg-black hover:bg-gray-900 transition-colors flex items-center justify-center text-payram-lime"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 10l7-7m0 0l7 7m-7-7v18"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
       </footer>
     </div>

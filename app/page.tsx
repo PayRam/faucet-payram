@@ -365,11 +365,11 @@ export default function Home() {
 
           {/* Right Side - Information */}
           <div className="space-y-6">
-            <div className="rounded-2xl p-8 shadow-2xl border border-white/16">
-              <h2 className="text-2xl font-bold text-white mb-4">
+            <div className="rounded-2xl p-8 shadow-2xl border border-[#F9F5F0]/30">
+              <h2 className="text-2xl font-bold text-[#F9F5F0]/60 mb-4">
                 How to Create and Deploy an ERC20 Token (Smart Contract)
               </h2>
-              <p className="text-gray-200 mb-4 text-base">
+              <p className="text-[#F9F5F0]/70 mb-4 text-base">
                 This guide will bring you up to speed with ERC-20 tokens and
                 show you how to create them.
               </p>
@@ -379,11 +379,11 @@ export default function Home() {
               </button>
             </div>
 
-            <div className="rounded-2xl p-8 shadow-2xl border border-white/16">
-              <h2 className="text-2xl font-bold text-white mb-4">
+            <div className="rounded-2xl p-8 shadow-2xl border border-[#F9F5F0]/30">
+              <h2 className="text-2xl font-bold text-[#F9F5F0]/60 mb-4">
                 How to Create and Deploy an ERC-721 (NFT)
               </h2>
-              <p className="text-gray-200 mb-4 text-base">
+              <p className="text-[#F9F5F0]/70 mb-4 text-base">
                 This guide will show you how to create and deploy an ERC-721
                 token.
               </p>
@@ -420,11 +420,11 @@ export default function Home() {
             </div> */}
 
             {/* Faucet Information */}
-            <div className="rounded-2xl p-8 shadow-2xl border border-white/16">
-              <h3 className="text-xl font-bold text-white mb-4">
+            <div className="rounded-2xl p-8 shadow-2xl border border-[#F9F5F0]/30">
+              <h3 className="text-xl font-bold text-[#F9F5F0]/60 mb-4">
                 Faucet Information
               </h3>
-              <ul className="space-y-3 text-gray-300">
+              <ul className="space-y-3 text-[#F9F5F0]/70">
                 <li className="flex items-start gap-2">
                   <span className="text-payram-green mt-1">✓</span>
                   <span>Minimum 0.0025 ETH balance on Mainnet required</span>

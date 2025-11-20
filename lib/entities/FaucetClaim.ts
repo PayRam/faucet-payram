@@ -13,7 +13,7 @@ export class FaucetClaim {
   @Column({ type: "varchar", length: 42 })
   to_wallet_address!: string;
 
-  @Column({ type: "varchar", length: 42 })
+  @Column({ type: "varchar", length: 42, nullable: true })
   from_wallet_address!: string;
 
   @Column({ type: "varchar", length: 255, unique: true })

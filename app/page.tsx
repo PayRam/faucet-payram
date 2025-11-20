@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAccount, useBalance, useDisconnect } from "wagmi";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { mainnet } from "wagmi/chains";
@@ -30,6 +30,26 @@ export default function Home() {
   const [mainnetBalance, setMainnetBalance] = useState<any>(null);
   const [messageType, setMessageType] = useState<"success" | "error" | "">("");
   const [openFaqId, setOpenFaqId] = useState<number | null>(null);
+  const [config, setConfig] = useState({
+    minMainnetBalance: 0.0025,
+    cooldownMinutes: 5,
+    dailyClaimLimit: 3,
+    faucetAmount: "0.05",
+  });
+
+  // Fetch configuration on mount
+  useEffect(() => {
+    const fetchConfig = async () => {
+      try {
+        const response = await axios.get("/api/config");
+        setConfig(response.data);
+      } catch (error) {
+        console.error("Failed to fetch config:", error);
+        // Keep default values if fetch fails
+      }
+    };
+    fetchConfig();
+  }, []);
 
   const handleContinue = async () => {
     const walletAddress = isConnected ? address : manualAddress;
@@ -58,7 +78,7 @@ export default function Home() {
         setMainnetBalance(response.data.balance);
       } else {
         setMessage(
-          `Insufficient balance. Minimum 0.0025 ETH required. Current: ${response.data.balance} ETH`
+          `Insufficient balance. Minimum ${config.minMainnetBalance} ETH required. Current: ${response.data.balance} ETH`
         );
         setMessageType("error");
         setBalanceChecked(false);
@@ -115,7 +135,7 @@ export default function Home() {
   console.log("Mainnet Balance:", mainnetBalance);
 
   const minBalance = parseFloat(mainnetBalance || "0");
-  const hasMinBalance = minBalance >= 0.0025;
+  const hasMinBalance = minBalance >= config.minMainnetBalance;
 
   return (
     <div className="min-h-screen bg-black">
@@ -131,7 +151,9 @@ export default function Home() {
             className="w-32 md:w-[180px] h-auto"
           />
         </div>
-        <ConnectButton />
+        <div className="payram-connect-button">
+          <ConnectButton />
+        </div>
       </header>
 
       {/* Main Content */}
@@ -180,9 +202,9 @@ export default function Home() {
                   address manually below.
                 </p>
                 <p className="text-gray-400 text-sm mb-4">
-                  A user's wallet must hold at least{" "}
+                  A user&apos;s wallet must hold at least{" "}
                   <span className="text-payram-green font-semibold">
-                    0.001 ETH on Ethereum Mainnet
+                    {config.minMainnetBalance} ETH on Ethereum Mainnet
                   </span>{" "}
                   to use the EVM faucets.
                 </p>
@@ -279,8 +301,8 @@ export default function Home() {
                       </p>
                       {!hasMinBalance && (
                         <p className="text-red-400 text-xs mt-2">
-                          ⚠ Invalid ETH mainnet balance. Minimum 0.0025 ETH
-                          required.
+                          ⚠ Invalid ETH mainnet balance. Minimum{" "}
+                          {config.minMainnetBalance} ETH required.
                         </p>
                       )}
                     </div>
@@ -436,15 +458,22 @@ export default function Home() {
               <ul className="space-y-3 text-[#F9F5F0]/70">
                 <li className="flex items-start gap-2">
                   <span className="text-payram-green mt-1">✓</span>
-                  <span>Minimum 0.0025 ETH balance on Mainnet required</span>
+                  <span>
+                    Minimum {config.minMainnetBalance} ETH balance on Mainnet
+                    required
+                  </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-payram-green mt-1">✓</span>
-                  <span>5 minutes cooldown between claims</span>
+                  <span>
+                    {config.cooldownMinutes} minutes cooldown between claims
+                  </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-payram-green mt-1">✓</span>
-                  <span>Maximum 3 claims per day per wallet</span>
+                  <span>
+                    Maximum {config.dailyClaimLimit} claims per day per wallet
+                  </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-payram-green mt-1">✓</span>
@@ -452,7 +481,9 @@ export default function Home() {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-payram-green mt-1">✓</span>
-                  <span>0.05 Sepolia ETH per successful claim</span>
+                  <span>
+                    {config.faucetAmount} Sepolia ETH per successful claim
+                  </span>
                 </li>
               </ul>
             </div>

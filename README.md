@@ -94,6 +94,8 @@ A modern, secure Ethereum Sepolia testnet faucet built with Next.js 15, featurin
    DAILY_CLAIM_LIMIT=3
    MAX_DAILY_CLAIMS=100
    FAUCET_AMOUNT=0.05
+   # Maximum total amount that can be claimed from the faucet in ETH in a day (daily budget)
+   MAX_DAILY_CLAIMS=0.15 
 
    # Twitter API (for tweet verification)
    TWITTER_API_KEY=your_TWITTER_API_KEY
@@ -350,7 +352,7 @@ npm run typeorm
 | `DAILY_CLAIM_LIMIT`                    | Claims per day                         | No       | 3       |
 | `MAX_DAILY_CLAIMS`                     | Daily budget (ETH)                     | No       | 100     |
 | `FAUCET_AMOUNT`                        | ETH per claim                          | No       | 0.05    |
-| `TWITTER_API_KEY`                      | Twitter API key                        | No       | -       |
+| `TWITTER_API_KEY`                      | Twitter API key                        | Yes      | -       |
 | `NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID` | WalletConnect ID                       | Yes      | -       |
 
 ## 🤝 Contributing

@@ -534,78 +534,83 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-8 md:mt-16 py-6 md:py-8 bg-payram-lime">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-0">
-            {/* Left Side - Logo and Copyright */}
-            <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8 w-full md:w-auto">
+      <footer className="mt-8 md:mt-20 py-8 md:py-16 bg-payram-lime">
+        <div className="container mx-auto px-6 md:px-12 lg:px-16">
+          {/* First Row - Logo and Social Links */}
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8 mb-8 md:mb-12">
+            {/* Logo */}
+            <div className="flex-shrink-0">
               <Image
                 src="/PayRam_longshadow_long_1.svg"
                 alt="Payram Logo"
-                width={140}
-                height={31}
+                width={400}
+                height={88}
                 priority
-                className="w-32 md:w-[180px] h-auto"
+                className="w-64 md:w-[400px] h-auto"
               />
-              <div className="flex flex-wrap items-center gap-2 md:gap-4 text-xs md:text-sm text-gray-900">
-                <span className="whitespace-nowrap">© 2025 — Copyright</span>
-                <span className="hidden md:inline">|</span>
-                <a
-                  href="https://payram.com/privacy-policy"
-                  className="hover:text-black transition-colors whitespace-nowrap"
-                >
-                  Privacy Policy
-                </a>
-                <a
-                  href="https://payram.com/terms-and-conditions"
-                  className="hover:text-black transition-colors whitespace-nowrap"
-                >
-                  Terms & Conditions
-                </a>
-                <a
-                  href="https://payram.com/cookie-policy"
-                  className="hover:text-black transition-colors whitespace-nowrap"
-                >
-                  Cookie Policy
-                </a>
-              </div>
             </div>
 
-            {/* Right Side - Social Links and Back to Top */}
+            {/* Social Links and Back to Top */}
             <div className="flex items-center gap-3 md:gap-4">
               <a
                 href="https://www.linkedin.com/company/payram"
-                className="flex items-center gap-1.5 md:gap-2 text-gray-900 hover:text-black transition-colors text-sm md:text-base"
+                className="flex items-center gap-2 text-gray-900 hover:text-black transition-colors text-sm md:text-base"
               >
                 <svg
-                  className="w-3.5 h-3.5 md:w-4 md:h-4"
+                  className="w-4 h-4 md:w-5 md:h-5"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                 </svg>
-                <span className="hidden sm:inline">LinkedIn</span>
+                <span>LinkedIn</span>
               </a>
               <a
                 href="https://x.com/PayRamApp"
-                className="flex items-center gap-1.5 md:gap-2 text-gray-900 hover:text-black transition-colors text-sm md:text-base"
+                className="flex items-center gap-2 text-gray-900 hover:text-black transition-colors text-sm md:text-base"
               >
-                <Twitter className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                <span className="hidden sm:inline">Twitter</span>
+                <Twitter className="w-4 h-4 md:w-5 md:h-5" />
+                <span>Twitter</span>
               </a>
               <a
                 href="mailto:dev@payram.com"
-                className="flex items-center gap-1.5 md:gap-2 text-gray-900 hover:text-black transition-colors text-sm md:text-base"
+                className="flex items-center gap-2 text-gray-900 hover:text-black transition-colors text-sm md:text-base"
               >
-                <Mail className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                <span className="hidden sm:inline">Email</span>
+                <Mail className="w-4 h-4 md:w-5 md:h-5" />
+                <span>Email</span>
               </a>
               <button
                 onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                className="ml-2 md:ml-4 w-9 h-9 md:w-10 md:h-10 rounded-full bg-black hover:bg-gray-900 transition-colors flex items-center justify-center text-payram-lime"
+                className="ml-2 w-10 h-10 md:w-11 md:h-11 rounded-full bg-black hover:bg-gray-900 transition-colors flex items-center justify-center text-payram-lime"
               >
-                <ArrowUp className="w-5 h-5" />
+                <ArrowUp className="w-5 h-5 md:w-6 md:h-6" />
               </button>
+            </div>
+          </div>
+
+          {/* Second Row - Copyright */}
+          <div className="flex flex-wrap items-center gap-2 md:gap-4 text-xs md:text-sm text-gray-900">
+            <span className="whitespace-nowrap">© 2025 — Copyright</span>
+            <span className="hidden md:inline">|</span>
+            <div className="flex flex-wrap gap-2 md:gap-4">
+              <a
+                href="https://payram.com/privacy-policy"
+                className="hover:text-black transition-colors whitespace-nowrap"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="https://payram.com/terms-and-conditions"
+                className="hover:text-black transition-colors whitespace-nowrap"
+              >
+                Terms & Conditions
+              </a>
+              <a
+                href="https://payram.com/cookie-policy"
+                className="hover:text-black transition-colors whitespace-nowrap"
+              >
+                Cookie Policy
+              </a>
             </div>
           </div>
         </div>

@@ -29,7 +29,7 @@ export default function Home() {
   const [message, setMessage] = useState("");
   const [mainnetBalance, setMainnetBalance] = useState<any>(null);
   const [messageType, setMessageType] = useState<"success" | "error" | "">("");
-  const [openFaqId, setOpenFaqId] = useState<number | null>(null);
+  const [openFaqId, setOpenFaqId] = useState<number | null>(1);
   const [config, setConfig] = useState({
     minMainnetBalance: 0.0025,
     cooldownMinutes: 5,

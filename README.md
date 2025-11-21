@@ -6,7 +6,7 @@ A modern, secure Ethereum Sepolia testnet faucet built with Next.js 15, featurin
 
 ## 🌟 Features
 
-- **Multi-Wallet Support**: Connect with MetaMask, Coinbase Wallet, WalletConnect, and more via RainbowKit
+- **Multi-wallet Support**: Connect with MetaMask, Coinbase Wallet, WalletConnect, and more via RainbowKit
 - **Twitter Verification**: Tweet-to-earn system with 2x bonus rewards
 - **Mainnet Balance Check**: Requires minimum 0.0025 ETH on Ethereum Mainnet to prevent abuse
 - **Rate Limiting**:

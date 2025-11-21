@@ -13,6 +13,10 @@ import {
   ArrowUp,
   ChevronRight,
   ChevronDown,
+  Globe,
+  Book,
+  Github,
+  MessageCircle,
 } from "lucide-react";
 import faqData from "@/data/FAQ.json";
 
@@ -400,57 +404,62 @@ export default function Home() {
           <div className="space-y-6">
             <div className="rounded-2xl p-8 shadow-2xl border border-[#F9F5F0]/30">
               <h2 className="text-2xl font-bold text-[#F9F5F0]/60 mb-4">
-                How to Create and Deploy an ERC20 Token (Smart Contract)
+                What is PayRam?
               </h2>
-              <p className="text-[#F9F5F0]/70 mb-4 text-base">
-                This guide will bring you up to speed with ERC-20 tokens and
-                show you how to create them.
+              <p className="text-[#F9F5F0]/70 mb-6 text-base">
+                PayRam is a self-hosted crypto payments gateway that powers fast
+                and reliable stablecoin payments for global merchants and
+                creators. PayRam enables permissionless commerce so anyone can
+                accept payments without approvals or middlemen.
               </p>
-              <button className="text-payram-lime hover:text-payram-green font-semibold flex items-center gap-2 transition-colors">
-                Explore this guide
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-
-            <div className="rounded-2xl p-8 shadow-2xl border border-[#F9F5F0]/30">
-              <h2 className="text-2xl font-bold text-[#F9F5F0]/60 mb-4">
-                How to Create and Deploy an ERC-721 (NFT)
-              </h2>
-              <p className="text-[#F9F5F0]/70 mb-4 text-base">
-                This guide will show you how to create and deploy an ERC-721
-                token.
-              </p>
-              <button className="text-payram-lime hover:text-payram-green font-semibold flex items-center gap-2 transition-colors text-base">
-                Explore this guide
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* <div className="rounded-2xl p-8 shadow-2xl border border-white/16">
-              <h2 className="text-2xl font-bold text-white mb-4">
-                How to Make a Flash Loan using Aave (DeFi)
-              </h2>
-              <p className="text-gray-200 mb-4">
-                This guide will give you an overview of Aave as well as flash
-                loans and walk you through how to create a flash loan smart...
-              </p>
-              <button className="text-payram-lime hover:text-payram-green font-semibold flex items-center gap-2 transition-colors">
-                Explore this guide
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+              <div className="space-y-3">
+                <a
+                  href="https://payram.short.gy/payram-faucet"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-payram-lime hover:text-payram-green font-semibold flex items-center gap-2 transition-colors"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </button>
-            </div> */}
+                  <Globe className="w-4 h-4" />
+                  Website
+                </a>
+                <a
+                  href="https://payram.short.gy/payram-faucet-docs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-payram-lime hover:text-payram-green font-semibold flex items-center gap-2 transition-colors"
+                >
+                  <Book className="w-4 h-4" />
+                  Docs
+                </a>
+                <a
+                  href="https://payram.short.gy/payram-faucet-github"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-payram-lime hover:text-payram-green font-semibold flex items-center gap-2 transition-colors"
+                >
+                  <Github className="w-4 h-4" />
+                  GitHub
+                </a>
+                <a
+                  href="https://payram.short.gy/payram-faucet-x"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-payram-lime hover:text-payram-green font-semibold flex items-center gap-2 transition-colors"
+                >
+                  <Twitter className="w-4 h-4" />
+                  Twitter
+                </a>
+                <a
+                  href="https://payram.short.gy/payram-faucet-tg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-payram-lime hover:text-payram-green font-semibold flex items-center gap-2 transition-colors"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  Telegram
+                </a>
+              </div>
+            </div>
 
             {/* Faucet Information */}
             <div className="rounded-2xl p-8 shadow-2xl border border-[#F9F5F0]/30">
@@ -568,7 +577,7 @@ export default function Home() {
                 <span>LinkedIn</span>
               </a>
               <a
-                href="https://x.com/PayRamApp"
+                href="https://payram.short.gy/payram-faucet-x"
                 className="flex items-center gap-2 text-gray-900 hover:text-black transition-colors text-sm md:text-base"
               >
                 <Twitter className="w-4 h-4 md:w-5 md:h-5" />

@@ -1,8 +1,8 @@
-# Payram Sepolia Faucet
+# PayRam Sepolia Faucet
 
 A modern, secure Ethereum Sepolia testnet faucet built with Next.js 15, featuring wallet connectivity, Twitter verification, and comprehensive claim management.
 
-![Payram Faucet](public/green-payram-badge-350x100.png)
+![PayRam Faucet](public/green-payram-badge-350x100.png)
 
 ## 🌟 Features
 
@@ -14,7 +14,7 @@ A modern, secure Ethereum Sepolia testnet faucet built with Next.js 15, featurin
   - Maximum 3 claims per day per wallet
   - Daily token budget system for sustainable distribution
 - **Database Tracking**: Complete claim history with wallet addresses, IP addresses, and timestamps
-- **Responsive Design**: Mobile-first UI with Tailwind CSS and custom Payram branding
+- **Responsive Design**: Mobile-first UI with Tailwind CSS and custom PayRam branding
 - **Real-time Status**: Transaction tracking and claim verification
 - **FAQ Section**: Comprehensive help documentation for users
 
@@ -95,7 +95,7 @@ A modern, secure Ethereum Sepolia testnet faucet built with Next.js 15, featurin
    MAX_DAILY_CLAIMS=100
    FAUCET_AMOUNT=0.05
    # Maximum total amount that can be claimed from the faucet in ETH in a day (daily budget)
-   MAX_DAILY_CLAIMS=0.15 
+   MAX_DAILY_CLAIMS=0.15
 
    # Twitter API (for tweet verification)
    TWITTER_API_KEY=your_TWITTER_API_KEY
@@ -389,7 +389,7 @@ For support, email dev@payram.com or visit our [website](https://payram.com).
 
 ---
 
-Built with ❤️ by the Payram Team
+Built with ❤️ by the PayRam Team
 
 ```typescript
 colors: {

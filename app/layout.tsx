@@ -10,8 +10,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Payram Sepolia Faucet",
-  description: "Get Sepolia ETH for testing",
+  title: "Free Ethereum Sepolia Faucet | PayRam",
+  description:
+    "Get free Ethereum Sepolia testnet ETH instantly with PayRam faucet. A fast and reliable faucet for developers testing smart contracts, dApps, and on-chain payments on the Sepolia network.",
   icons: {
     icon: "/favicon.ico",
   },

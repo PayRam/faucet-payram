@@ -148,7 +148,7 @@ export default function Home() {
         <div className="flex items-center gap-3">
           <Image
             src="/payram_horizontalVividGreen.svg"
-            alt="Payram Logo"
+            alt="PayRam Logo"
             width={180}
             height={39}
             priority
@@ -174,7 +174,7 @@ export default function Home() {
             <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-6">
               <Image
                 src="/payram_logoIconVividGreen.svg"
-                alt="Payram Logo"
+                alt="PayRam Logo"
                 width={60}
                 height={17}
                 priority
@@ -553,7 +553,7 @@ export default function Home() {
             <div className="flex-shrink-0">
               <Image
                 src="/PayRam_longshadow_long_1.svg"
-                alt="Payram Logo"
+                alt="PayRam Logo"
                 width={400}
                 height={88}
                 priority

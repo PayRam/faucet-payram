@@ -177,13 +177,14 @@ export default function Home() {
                 className="w-12 md:w-[90px] h-auto"
               />
               <h1 className="text-2xl md:text-4xl font-bold text-white">
-                Ethereum Sepolia Faucet
+                Free Ethereum Sepolia Faucet
               </h1>
             </div>
 
             <p className="text-gray-300 mb-6 md:mb-8 leading-relaxed text-sm md:text-base">
-              QuickNode got tired of having to scrounge for testnet tokens, so
-              we created this Ethereum Faucet for Sepolia.
+              Stop hunting for testnet Ethereum Sepolia. PayRam gives you free
+              and instant Sepolia ETH so you can test smart contracts, dApps,
+              and payments without friction.
             </p>
 
             {/* Wallet Connection Section */}
@@ -197,16 +198,16 @@ export default function Home() {
 
               <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
                 <p className="text-gray-400 text-sm mb-4">
-                  Connect your wallet! We support Coinbase Wallet, MetaMask,
-                  Uniswap Wallet, and Phantom wallet. Or enter your wallet
-                  address manually below.
+                  Enter the wallet where you want to receive the free Sepolia
+                  ETH. You can connect a supported wallet or type in your
+                  address manually.
                 </p>
                 <p className="text-gray-400 text-sm mb-4">
-                  A user&apos;s wallet must hold at least{" "}
+                  Your wallet must hold at least{" "}
                   <span className="text-payram-green font-semibold">
                     {config.minMainnetBalance} ETH on Ethereum Mainnet
                   </span>{" "}
-                  to use the EVM faucets.
+                  to access the EVM faucet.
                 </p>
 
                 {/* Manual Address Input */}
@@ -317,7 +318,7 @@ export default function Home() {
                 <span className="bg-payram-green text-payram-dark w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">
                   2
                 </span>
-                Share a tweet to get 2x bonus!
+                Share a tweet
               </h2>
 
               <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
@@ -331,8 +332,9 @@ export default function Home() {
                   </svg>
                   <div>
                     <p className="text-gray-300 text-sm mb-2">
-                      Click the button below to compose a tweet about this
-                      faucet.
+                      Tell the world you are using the PayRam faucet. After
+                      posting, share your X post link here to unlock the next
+                      step.
                     </p>
                     <a
                       href={generateTweetText()}
@@ -347,7 +349,7 @@ export default function Home() {
                       >
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                       </svg>
-                      Click-2-Tweet
+                      Click-to-Post
                     </a>
                   </div>
                 </div>
@@ -377,7 +379,7 @@ export default function Home() {
               }
               className="w-full bg-gradient-to-r from-payram-green to-payram-lime text-payram-dark font-bold text-lg py-4 rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg"
             >
-              {loading ? "Processing..." : "Continue →"}
+              {loading ? "Processing..." : "Claim free Sepolia ETH"}
             </button>
 
             {/* Message Display */}
